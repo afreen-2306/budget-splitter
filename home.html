@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Make the card wider for the dashboard content */
+        .card { width: 800px; max-width: 95%; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Welcome {{ user }} 👋</h2>
+        <p>You are successfully logged in!</p>
+
+        <a href="{{ url_for('logout') }}">
+            <button>Logout</button>
+        </a>
+
+        <hr style="border-color: rgba(255,255,255,0.3);">
+
+        <!-- Create New Group Section -->
+        <h3>Start a New Group</h3>
+        <form action="/create_group" method="POST">
+            <input type="text" name="group_name" placeholder="Group Name (e.g., Trip)" required>
+            <input type="text" name="members" placeholder="Members (comma separated)" required>
+            <button type="submit">Create Group</button>
+        </form>
+
+        <hr style="border-color: rgba(255,255,255,0.3);">
+
+        <!-- List of Existing Groups -->
+        <h3>Your Groups</h3>
+        
+        {% for group in groups %}
+            <div style="background: rgba(0,0,0,0.2); padding: 10px; margin: 10px 0; border-radius: 5px; text-align: left; overflow: hidden;">
+                <span style="font-size: 18px; font-weight: bold; color: #fff;">{{ group['name'] }}</span>
+                <a href="/group/{{ group['id'] }}" style="float: right; background: #00c6ff; padding: 5px 10px; border-radius: 5px; color: white; text-decoration: none;">View Details</a>
+            </div>
+        {% else %}
+            <p style="color: #ddd;">You haven't created any groups yet.</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

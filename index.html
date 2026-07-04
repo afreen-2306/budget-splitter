@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <!-- Link the CSS file directly -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- This creates the centered glass card -->
+    <div class="card">
+        <h2>Welcome to My Web App 🚀</h2>
+        <p>Simple Authentication System using Flask</p>
+        
+        <br>
+        
+        <a href="{{ url_for('login') }}">
+            <button>Login</button>
+        </a>
+        
+        <br><br>
+        
+        <a href="{{ url_for('register') }}">
+            <button>Register</button>
+        </a>
+    </div>
+
+</body>
+</html>

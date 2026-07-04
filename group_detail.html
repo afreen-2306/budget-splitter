@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ group['name'] }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Wider card for tables */
+        .card { width: 900px; max-width: 95%; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; color: #fff; }
+        th, td { border: 1px solid rgba(255,255,255,0.3); padding: 8px; text-align: left; }
+        th { background: rgba(0,0,0,0.3); }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <a href="/home" style="display: block; margin-bottom: 20px; color: #fff;">← Back to Home</a>
+        <h1 style="color: #fff;">Group: {{ group['name'] }}</h1>
+
+        <!-- Add Expense Form -->
+        <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+            <h3 style="color: #fff;">Add Expense</h3>
+            <form action="/add_expense/{{ group['id'] }}" method="POST">
+                <input type="text" name="description" placeholder="Item name" required>
+                <input type="number" step="0.01" name="amount" placeholder="Amount" required>
+                
+                <label for="paid_by" style="color: #fff;">Paid by:</label>
+                <select name="paid_by" id="paid_by">
+                    {% for member in members %}
+                        <option value="{{ member }}">{{ member }}</option>
+                    {% endfor %}
+                </select>
+                
+                <button type="submit">Add Expense</button>
+            </form>
+        </div>
+
+        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+            <!-- Expenses Table -->
+            <div style="flex: 1; min-width: 300px;">
+                <h2 style="color: #fff;">Expenses</h2>
+                <table>
+                    <thead>
+                        <tr><th>Description</th><th>Amount</th><th>Paid By</th><th>Date</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for exp in expenses %}
+                        <tr>
+                            <td>{{ exp['description'] }}</td>
+                            <td>${{ "%.2f"|format(exp['amount']) }}</td>
+                            <td>{{ exp['paid_by'] }}</td>
+                            <td>{{ exp['date'] }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="4" style="text-align:center;">No expenses yet</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <h3 style="color: #fff;">Total: ${{ "%.2f"|format(total) }}</h3>
+            </div>
+
+            <!-- Balances -->
+            <div style="flex: 1; min-width: 250px;">
+                <h2 style="color: #fff;">Balances</h2>
+                <ul style="list-style-type: none; padding: 0;">
+                    {% for name, balance in balances.items() %}
+                    <li style="background: rgba(255,255,255,0.1); margin: 5px 0; padding: 10px; border-radius: 5px; color: #fff;">
+                        <strong>{{ name }}</strong>: 
+                        {% if balance > 0 %}
+                            <span style="color: #00ff00;">Gets back ${{ "%.2f"|format(balance) }}</span>
+                        {% elif balance < 0 %}
+                            <span style="color: #ff6666;">Owes ${{ "%.2f"|format(balance|abs) }}</span>
+                        {% else %}
+                            <span style="color: #ccc;">Settled</span>
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

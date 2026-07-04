@@ -1,0 +1,107 @@
+/* Background */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+
+    /* Background settings */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url("https://images.unsplash.com/photo-1498050108023-c5249f4df085");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    /* THIS PART CENTERS THE BOX */
+    height: 100vh;          /* Full screen height */
+    display: flex;          /* Use Flexbox */
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+}
+
+/* Glass Card */
+/* Glass Card */
+.card {
+    width: 360px;          /* Fixed width for the box */
+    padding: 30px;         /* Space inside the box */
+    
+    background: rgba(255, 255, 255, 0.15); /* Transparent white */
+    backdrop-filter: blur(12px);           /* Blur effect */
+    
+    border-radius: 15px;   /* Rounded corners */
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3); /* Shadow */
+    
+    text-align: center;    /* Center the text */
+    color: #fff;           /* White text color */
+}
+.card-wide{
+    width:800px;
+    max-width:95%;
+}
+
+/* Title */
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+
+    border: none;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+
+    border: none;
+    border-radius: 8px;
+    background: #1bc47e;
+    color: white;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #1b89c4;
+}
+
+/* Links */
+a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Small text */
+p {
+    margin-top: 15px;
+    font-size: 14px;
+    color:#fff;
+}
+/* Table Styling for Group Details */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    color: #fff;
+}
+
+th, td {
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background: rgba(0,0,0,0.3);
+}
